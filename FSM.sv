@@ -1,12 +1,12 @@
 module FSM(
-	input logic i_rst_n,
-	input logic i_clk,
+  input logic i_rst_n,
+  input logic i_clk,
   input logic i_nickle,
   input logic i_dime,
   input logic i_quarter,
 	
-	output logic o_soda,
-	output logic [2:0] o_change
+  output logic o_soda,
+  output logic [2:0] o_change
 ); 
 
   // Dinh nghia STATE
@@ -27,7 +27,7 @@ module FSM(
 		  IDLE: begin
 			  if(o_soda == 1)
 				  state_d = IDLE;
-	      else if((i_nickle == 1) && (i_dime == 0) && (i_quarter == 0)) 
+	            else if((i_nickle == 1) && (i_dime == 0) && (i_quarter == 0)) 
 					state_d = COIN_5;
 				else if((i_nickle == 0) && (i_dime == 1) && (i_quarter == 0)) 
 				  state_d = COIN_10;
@@ -40,7 +40,7 @@ module FSM(
 			COIN_5: begin
         if(o_soda == 1)
 				  state_d = IDLE;
-	      else if((i_nickle == 1) && (i_dime == 0) && (i_quarter == 0))
+	            else if((i_nickle == 1) && (i_dime == 0) && (i_quarter == 0))
 					state_d = COIN_10;
 				else if((i_nickle == 0) && (i_dime == 1) && (i_quarter == 0))
 				  state_d = COIN_15;
@@ -53,7 +53,7 @@ module FSM(
 			COIN_10: begin
 				if(o_soda == 1)
 				  state_d = IDLE;
-	      else if((i_nickle == 1) && (i_dime == 0) && (i_quarter == 0))
+	            else if((i_nickle == 1) && (i_dime == 0) && (i_quarter == 0))
 					state_d = COIN_15;
 				else if((i_nickle == 0) && (i_dime == 1) && (i_quarter == 0))
 				  state_d = COIN_20;
@@ -63,7 +63,7 @@ module FSM(
 					state_d = state_q;
 			end
 			
-			COIN_15: begin
+		    COIN_15: begin
 	      if(o_soda == 1)
 				  state_d = IDLE;
 	      else if((i_nickle == 1) && (i_dime == 0) && (i_quarter == 0))
@@ -75,7 +75,6 @@ module FSM(
 				else 
 					state_d = state_q;
 			end
-			
 			COIN_20: state_d = IDLE;
 		
 			default: state_d = IDLE;
@@ -95,10 +94,10 @@ module FSM(
 	  o_soda = (((state_q == IDLE) && (i_nickle == 0) && (i_dime == 0) && (i_quarter == 1)) ||
 		         ((state_q == COIN_5) && (i_nickle == 0) && (i_dime == 0) && (i_quarter == 1)) ||
 		         ((state_q == COIN_10) && (i_nickle == 0) && (i_dime == 0) && (i_quarter == 1)) ||
-						 ((state_q == COIN_10) && (i_nickle == 0) && (i_dime == 1) && (i_quarter == 0)) ||
-						 ((state_q == COIN_15) && (i_nickle == 1) && (i_dime == 0) && (i_quarter == 0)) ||
-						 ((state_q == COIN_15) && (i_nickle == 0) && (i_dime == 1) && (i_quarter == 0)) ||
-						 ((state_q == COIN_15) && (i_nickle == 0) && (i_dime == 0) && (i_quarter == 1))
+				 ((state_q == COIN_10) && (i_nickle == 0) && (i_dime == 1) && (i_quarter == 0)) ||
+				 ((state_q == COIN_15) && (i_nickle == 1) && (i_dime == 0) && (i_quarter == 0)) ||
+				 ((state_q == COIN_15) && (i_nickle == 0) && (i_dime == 1) && (i_quarter == 0)) ||
+				 ((state_q == COIN_15) && (i_nickle == 0) && (i_dime == 0) && (i_quarter == 1))
 						 );
 	end 
 
@@ -121,6 +120,5 @@ module FSM(
 		  o_change = IDLE;
 	end 
 	
-
-	
 endmodule
+
